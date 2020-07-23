@@ -35,25 +35,14 @@ export default function App() {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)       
 
-  
-  const getTeam = () => {
-     
-    axios.get('https://reqres.in/api/users')
-      .then(res => {
-        console.log(res.data)
-        setTeam(res.data)
-      })
-      .catch(err => {
-        debugger
-      })
-  }
+ 
 
   const postNewTeamMember = newTeamMember => {
     
     axios.post('https://reqres.in/api/users', newTeamMember)
       .then(res => {
         
-        setTeam([res.data, ...team])
+        setTeam([...team, res.data ])
         setFormValues(initialFormValues)
        
       })
@@ -110,9 +99,6 @@ export default function App() {
     postNewTeamMember(newTeamMember)
   }
 
-  useEffect(() => {
-    getTeam()
-  }, [])
 
   useEffect(() => {
     
